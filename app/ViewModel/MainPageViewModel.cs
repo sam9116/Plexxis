@@ -36,7 +36,14 @@ namespace app.ViewModel
             employeeManager = EmployeeManager.DefaultManager;
             plexxisEmployees = new EmployeesList();
         }
-        public async Task<bool> fetchEmployeeData()
+        public async Task fetchEmployeeData_Offline()
+        {
+            IsBusy = true;
+            employees = await employeeManager.GetEmployeesAsync();
+            plexxisEmployees.count = plexxisEmployees.employees.Count;
+            IsBusy = false;
+        }
+        public async Task fetchEmployeeData()
         {
             IsBusy = true;
             try
@@ -61,13 +68,10 @@ namespace app.ViewModel
             catch (Exception ex)
             {
 
-                employees = await employeeManager.GetEmployeesAsync();
-                plexxisEmployees.count = plexxisEmployees.employees.Count;
+
 
             }
             IsBusy = false;
-            return true;
-
         }
 
     }

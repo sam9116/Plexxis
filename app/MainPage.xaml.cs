@@ -28,7 +28,8 @@ namespace app
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await mainPageViewModel.fetchEmployeeData();
+            await mainPageViewModel.fetchEmployeeData_Offline();
+            mainPageViewModel.fetchEmployeeData();
         }
 
         private async void EmployeeView_Refreshing(object sender, EventArgs e)
