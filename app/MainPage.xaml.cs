@@ -22,7 +22,7 @@ namespace app
         {
             InitializeComponent();
             BindingContext = mainPageViewModel = new MainPageViewModel();
-         
+
             
         }
         protected override async void OnAppearing()
@@ -34,6 +34,11 @@ namespace app
         private async void EmployeeView_Refreshing(object sender, EventArgs e)
         {
             await mainPageViewModel.fetchEmployeeData();
+        }
+
+        private void Add_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

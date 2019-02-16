@@ -38,6 +38,7 @@ namespace app.ViewModel
         }
         public async Task<bool> fetchEmployeeData()
         {
+            IsBusy = true;
             try
             {
                 var request = WebRequest.Create(url);
@@ -64,6 +65,7 @@ namespace app.ViewModel
                 plexxisEmployees.count = plexxisEmployees.employees.Count;
 
             }
+            IsBusy = false;
             return true;
 
         }

@@ -3,27 +3,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
            
              xmlns:local="clr-namespace:app" x:Class="app.MainPage" Title="Plexxis Employees">
-             
-   <StackLayout>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Add" Text="Add" Clicked="Add_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
         <Label Text="Plexxis Employees" FontSize="25" Margin="5" TextColor="#000000"/>
-        <ListView x:Name="EmployeeView" ItemsSource="{Binding employees}" IsPullToRefreshEnabled="True" Refreshing="EmployeeView_Refreshing">
+        <ListView x:Name="EmployeeView"
+                  ItemsSource="{Binding employees}"
+                  IsPullToRefreshEnabled="True"
+                  Refreshing="EmployeeView_Refreshing"
+                  IsRefreshing="{Binding IsBusy}"
+                  >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Margin="5">
-                            <Label Text="{Binding Id}" TextColor="#000000" FontSize="6"/>
-                            <Label Text="{Binding Name}" TextColor="#000000" FontSize="6"/>
-                            <Label Text="{Binding Code}" TextColor="#000000" FontSize="6"/>
-                            <Label Text="{Binding Profession}" TextColor="#000000" FontSize="6"/>
-                            <Label Text="{Binding Color}" TextColor="#000000" FontSize="6"/>
-                            <Label Text="{Binding City}" TextColor="#000000" FontSize="6"/>
-                            <Label Text="{Binding Branch}" TextColor="#000000" FontSize="6"/>
-                            <Label Text="{Binding Assigned}" TextColor="#000000" FontSize="6"/>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Margin="5"  BackgroundColor="{Binding Color}" Opacity="25">
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label  HorizontalOptions="Start" Grid.Column="0" Text="{Binding Id}" TextColor="#000000" FontSize="Small"/>
+                                <Label  HorizontalOptions="Start" Grid.Column="1" Text="{Binding Name}" TextColor="#000000" FontSize="Small"/>
+                                <Label  HorizontalOptions="Start" Grid.Column="2" Text="{Binding Code}" TextColor="#000000" FontSize="Small"/>
+                                <Label  HorizontalOptions="Start" Grid.Column="3" Text="{Binding Profession}" TextColor="#000000" FontSize="Small"/>
+                                <Label  HorizontalOptions="Start" Grid.Column="4" Text="{Binding City}" TextColor="#000000" FontSize="Small"/>
+                                <Label  HorizontalOptions="Start" Grid.Column="5" Text="{Binding Branch}" TextColor="#000000" FontSize="Small"/>
+                                <Switch HorizontalOptions="End" Grid.Column="6"  x:Name="AssignedSwitch" IsToggled="{Binding Assigned}" IsEnabled="False" />
+                                
+                            </Grid>
+                            
+                            
+                       
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.Header>
+                <Grid Margin="5" BackgroundColor="Gray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Font="Small" Text="Id"></Label>
+                    <Label Grid.Column="1" Font="Small" Text="Name"></Label>
+                    <Label Grid.Column="2" Font="Small" Text="Code"></Label>
+                    <Label Grid.Column="3" Font="Small" Text="Profession"></Label>
+                    <Label Grid.Column="4" Font="Small" Text="City"></Label>
+                    <Label Grid.Column="5" Font="Small" Text="Branch"></Label>
+                    <Label Grid.Column="6" Font="Small" Text="Assigned"></Label>
+
+                </Grid>
+            </ListView.Header>
+            <ListView.FooterTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Label Text="The Footer Template" FontSize="30" BackgroundColor="Blue" TextColor="White"></Label>
+                    </Grid>
+                </DataTemplate>
+            </ListView.FooterTemplate>
+
         </ListView>
-     
-   </StackLayout>
+
+    </StackLayout>
 </ContentPage>
