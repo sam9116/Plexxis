@@ -1,0 +1,73 @@
+{ "employees": [
+  {
+    "Id": 1,
+    "Name": "Kyle Lowry",
+    "Code": "F100",
+    "Profession": "Drywall Installer",
+    "Color": "#FF6600",
+    "City": "Brampton",
+    "Branch": "Abacus",
+    "Assigned": true
+  },
+  {
+    "Id": 2,
+    "Name": "DeMar DeRozan",
+    "Code": "F101",
+    "Profession": "Drywall Installer",
+    "Color": "yellow",
+    "City": "Brampton",
+    "Branch": "Pillsworth",
+    "Assigned": false
+  },
+  {
+    "Id": 3,
+    "Name": "Fred Van Vleet",
+    "Code": "F102",
+    "Profession": "Drywall Installer",
+    "Color": "green",
+    "City": "Bolton",
+    "Branch": "Abacus",
+    "Assigned": false
+  },
+  {
+    "Id": 4,
+    "Name": "Jonas Valanciunas",
+    "Code": "F103",
+    "Profession": "Drywall Installer",
+    "Color": "#333333",
+    "City": "Bolton",
+    "Branch": "Pillsworth",
+    "Assigned": true
+  },
+  {
+    "Id": 5,
+    "Name": "Chris Bosh",
+    "Code": "F104",
+    "Profession": "Drywall Installer",
+    "Color": "#FF6600",
+    "City": "Brampton",
+    "Branch": "Abacus",
+    "Assigned": true
+  },
+  {
+    "Id": 6,
+    "Name": "Marcus Camby",
+    "Code": "F105",
+    "Profession": "Runner",
+    "Color": "red",
+    "City": "Brampton",
+    "Branch": "Pillsworth",
+    "Assigned": false
+  },
+  {
+    "Id": 7,
+    "Name": "Vince Carter",
+    "Code": "F106",
+    "Profession": "Runner",
+    "Color": "red",
+    "City": "Toronto",
+    "Branch": "Abacus",
+    "Assigned": false
+  }
+]
+}

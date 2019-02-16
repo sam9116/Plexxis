@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Plexxis Employees - Crud Exersise</title>
+    </head>
+
+    <body>
+        <h1>Plexxis Employees</h1>
+        <p id="employees"></p>
+
+
+        <script>
+            var employeesElement = document.getElementById("employees");
+     
+            fetch("http://localhost:8000/api/employee", {
+                method: 'get',
+            }).then( response => 
+                response.json().then( data => ({
+                    data: data,
+                    status: response.status
+                })
+            ).then( res => {
+                if( res.status === 200){
+                    console.log(res.data)
+                    var employeesList = [];
+
+                    res.data.employees.forEach( (employee, i) => {
+                        employeeString = "";
+
+                        Object.keys(employee).map( key => {
+                            employeeString += (key + ": " + employee[key] + "  ")
+                        })
+
+                        employeesList[i] = employeeString;
+                    });
+
+                    employeesList.forEach( element => {
+                        employeesElement.append(element );
+                        employeesElement.append(document.createElement("br"));
+                    })
+                }
+                else
+                    employeesElement.append("Could not recieve employees list.");
+
+                console.log(res.status, res.data)
+            })
+            )
+        </script>
+        <script type="text/javascript" src="cordova.js"></script>
+    </body>
+</html>

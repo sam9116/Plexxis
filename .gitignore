@@ -1,0 +1,9 @@
+.vscode/
+.vs/
+
+browser.json
+config.xml
+
+Debug/
+
+obj/.DS_Store

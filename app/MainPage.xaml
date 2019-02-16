@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+           
+             xmlns:local="clr-namespace:app" x:Class="app.MainPage" Title="Plexxis Employees">
+             
+   <StackLayout>
+        <Label Text="Plexxis Employees" FontSize="25" Margin="5" TextColor="#000000"/>
+        <ListView x:Name="EmployeeView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Margin="5" >
+                            <Label Text="{Binding Id}" TextColor="#000000" FontSize="6"/>
+                            <Label Text="{Binding Name}" TextColor="#000000" FontSize="6"/>
+                            <Label Text="{Binding Code}" TextColor="#000000" FontSize="6"/>
+                            <Label Text="{Binding Profession}" TextColor="#000000" FontSize="6"/>
+                            <Label Text="{Binding Color}" TextColor="#000000" FontSize="6"/>
+                            <Label Text="{Binding City}" TextColor="#000000" FontSize="6"/>
+                            <Label Text="{Binding Branch}" TextColor="#000000" FontSize="6"/>
+                            <Label Text="{Binding Assigned}" TextColor="#000000" FontSize="6"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+     
+   </StackLayout>
+</ContentPage>
