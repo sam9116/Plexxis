@@ -37,18 +37,25 @@ namespace app
         {
             try
             {
-                await Store.UpsertAsync("Employee", employees.Select(x => JObject.FromObject(x)), true);
+                await Store.InitializeAsync();                
             }
             catch(Exception ex)
             {
-                await Store.InitializeAsync();
-                await Store.UpsertAsync("Employee", employees.Select(x => JObject.FromObject(x)), true);
+              
             }
-            
+            await Store.UpsertAsync("Employee", employees.Select(x => JObject.FromObject(x)), true);
+
         }
         public async Task<ObservableCollection<Employee>> GetEmployeesAsync()
         {
-            await Store.InitializeAsync();
+            try
+            {
+                await Store.InitializeAsync();
+            }
+            catch
+            {
+
+            }
             var result = await Store.ExecuteQueryAsync("Employee", "Select * From Employee", new Dictionary<string, object>());
             ObservableCollection<Employee> Locallist = new ObservableCollection<Employee>();
             var converted_result = result.Select(x => JsonConvert.DeserializeObject<Employee>(x.ToString()));
@@ -63,29 +70,31 @@ namespace app
         {
             try
             {
-                await Store.UpsertAsync("Employee", new List<JObject>() { JObject.FromObject(employee) }, true);
+                await Store.InitializeAsync();                
             }
             catch (Exception ex)
             {
-                await Store.InitializeAsync();
-                await Store.UpsertAsync("Employee", new List<JObject>() { JObject.FromObject(employee) }, true);
+                               
             }
-            
+            await Store.UpsertAsync("Employee", new List<JObject>() { JObject.FromObject(employee) }, true);
+
         }
         public async Task DeleteEmployeeAsync(String Id)
         {
-            Dictionary<string, object> Ids = new Dictionary<string, object>();
-            Ids.Add("@Id", Id);
+            Dictionary<string, object> Ids = new Dictionary<string, object>
+            {
+                { "@Id", Id }
+            };
 
             try
             {
-                await Store.ExecuteQueryAsync("Employee", "Delete From Employee Where Id = @Id", Ids);
+                await Store.InitializeAsync();              
             }
             catch (Exception ex)
-            {
-                await Store.InitializeAsync();
-                await Store.ExecuteQueryAsync("Employee", "Delete From Employee Where Id = @Id", Ids);
+            {             
+                
             }
+            await Store.ExecuteQueryAsync("Employee", "Delete From Employee Where Id = @Id", Ids);
 
         }
 

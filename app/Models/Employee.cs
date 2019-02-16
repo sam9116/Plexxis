@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace app.Models
 {
     public class Employee
@@ -16,4 +13,5 @@ namespace app.Models
         public string Branch { get; set; }
         public bool Assigned { get; set; }
     }
+
 }

@@ -6,11 +6,11 @@
              
    <StackLayout>
         <Label Text="Plexxis Employees" FontSize="25" Margin="5" TextColor="#000000"/>
-        <ListView x:Name="EmployeeView">
+        <ListView x:Name="EmployeeView" ItemsSource="{Binding employees}" IsPullToRefreshEnabled="True" Refreshing="EmployeeView_Refreshing">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Margin="5" >
+                        <StackLayout Orientation="Horizontal" Margin="5">
                             <Label Text="{Binding Id}" TextColor="#000000" FontSize="6"/>
                             <Label Text="{Binding Name}" TextColor="#000000" FontSize="6"/>
                             <Label Text="{Binding Code}" TextColor="#000000" FontSize="6"/>
