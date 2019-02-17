@@ -11,13 +11,14 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json.Linq;
 using app.Models;
 using app.ViewModel;
+using Rg.Plugins.Popup.Services;
 
 namespace app
 {
     public partial class MainPage : ContentPage
     {
         public MainPageViewModel mainPageViewModel;
-      
+        Random r = new Random();
         public MainPage()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace app
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await mainPageViewModel.fetchEmployeeData_Offline();
+            mainPageViewModel.fetchEmployeeData_Offline();
             mainPageViewModel.fetchEmployeeData();
         }
 
@@ -37,9 +38,9 @@ namespace app
             await mainPageViewModel.fetchEmployeeData();
         }
 
-        private void Add_Clicked(object sender, EventArgs e)
-        {
-
+        private async void Add_Clicked(object sender, EventArgs e)
+        {            
+            await PopupNavigation.Instance.PushAsync(new PopUpContainer(new Employee() { Id = r.Next(),Name ="",Assigned = false,Branch="",City="",Code="",Color="",Profession="" }));
         }
     }
 }

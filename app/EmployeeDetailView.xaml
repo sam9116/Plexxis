@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="app.EmployeeDetailView">
+  <ContentView.Content>
+        <Grid BackgroundColor="White" Opacity="1">
+            <StackLayout Orientation="Vertical" >
+                <Editor Placeholder="Name" Text="{Binding Name,Mode=TwoWay}" TextColor="#000000" FontSize="Small"/>
+                <Editor Placeholder="Code" Text="{Binding Code,Mode=TwoWay}" TextColor="#000000" FontSize="Small"/>
+                <Editor Placeholder="Profession" Text="{Binding Profession,Mode=TwoWay}" TextColor="#000000" FontSize="Small"/>
+                <Editor Placeholder="City" Text="{Binding City ,Mode=TwoWay}" TextColor="#000000" FontSize="Small"/>
+                <Editor Placeholder="Branch" Text="{Binding Branch ,Mode=TwoWay}" TextColor="#000000" FontSize="Small"/>
+            </StackLayout>
+
+        </Grid>
+        
+    </ContentView.Content>
+</ContentView>

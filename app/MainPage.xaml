@@ -4,11 +4,10 @@
            
              xmlns:local="clr-namespace:app" x:Class="app.MainPage" Title="Plexxis Employees">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="Add" Text="Add" Clicked="Add_Clicked"></ToolbarItem>
+        <ToolbarItem x:Name="Add" Text="Add ➕" Clicked="Add_Clicked"></ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <StackLayout>
-        <Label Text="Plexxis Employees" FontSize="25" Margin="5" TextColor="#000000"/>
+    <StackLayout>       
         <ListView x:Name="EmployeeView"
                   ItemsSource="{Binding employees}"
                   IsPullToRefreshEnabled="True"
@@ -18,23 +17,23 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5"  BackgroundColor="{Binding Color}" Opacity="25">
-                            <Grid HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5"  BackgroundColor="{Binding Color}" Opacity="1">
+                            <Grid HorizontalOptions="FillAndExpand" Opacity="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="2*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Label  HorizontalOptions="Center" Grid.Column="0" Text="{Binding Id}" TextColor="#000000" FontSize="Small"/>
-                                <Label  HorizontalOptions="Center" Grid.Column="1" Text="{Binding Name}" TextColor="#000000" FontSize="Small"/>
-                                <Label  HorizontalOptions="Center" Grid.Column="2" Text="{Binding Code}" TextColor="#000000" FontSize="Small"/>
-                                <Label  HorizontalOptions="Center" Grid.Column="3" Text="{Binding Profession}" TextColor="#000000" FontSize="Small"/>
-                                <Label  HorizontalOptions="Center" Grid.Column="4" Text="{Binding City}" TextColor="#000000" FontSize="Small"/>
-                                <Label  HorizontalOptions="Center" Grid.Column="5" Text="{Binding Branch}" TextColor="#000000" FontSize="Small"/>
+                                <Label  HorizontalOptions="Center" Grid.Column="0" Text="{Binding Id}" TextColor="#000000"          FontSize="Micro"/>
+                                <Label  HorizontalOptions="Center" Grid.Column="1" Text="{Binding Name}" TextColor="#000000"        FontSize="Micro"/>
+                                <Label  HorizontalOptions="Center" Grid.Column="2" Text="{Binding Code}" TextColor="#000000"        FontSize="Micro"/>
+                                <Label  HorizontalOptions="Center" Grid.Column="3" Text="{Binding Profession}" TextColor="#000000"  FontSize="Micro"/>
+                                <Label  HorizontalOptions="Center" Grid.Column="4" Text="{Binding City}" TextColor="#000000"        FontSize="Micro"/>
+                                <Label  HorizontalOptions="Center" Grid.Column="5" Text="{Binding Branch}" TextColor="#000000"      FontSize="Micro"/>
                                 <Switch HorizontalOptions="Center" Grid.Column="6"  x:Name="AssignedSwitch" IsToggled="{Binding Assigned}" IsEnabled="False" />
                                 
                             </Grid>
@@ -49,20 +48,20 @@
                 <Grid Margin="5" BackgroundColor="Gray">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label HorizontalOptions="Center" Grid.Column="0" Font="Small" Text="Id"></Label>
-                    <Label HorizontalOptions="Center" Grid.Column="1" Font="Small" Text="Name"></Label>
-                    <Label HorizontalOptions="Center" Grid.Column="2" Font="Small" Text="Code"></Label>
-                    <Label HorizontalOptions="Center" Grid.Column="3" Font="Small" Text="Profession"></Label>
-                    <Label HorizontalOptions="Center" Grid.Column="4" Font="Small" Text="City"></Label>
-                    <Label HorizontalOptions="Center" Grid.Column="5" Font="Small" Text="Branch"></Label>
-                    <Label HorizontalOptions="Center" Grid.Column="6" Font="Small" Text="Assigned"></Label>
+                    <Label HorizontalOptions="Center" Grid.Column="0" Font="Micro" Text="Id"></Label>
+                    <Label HorizontalOptions="Center" Grid.Column="1" Font="Micro" Text="Name"></Label>
+                    <Label HorizontalOptions="Center" Grid.Column="2" Font="Micro" Text="Code"></Label>
+                    <Label HorizontalOptions="Center" Grid.Column="3" Font="Micro" Text="Profession"></Label>
+                    <Label HorizontalOptions="Center" Grid.Column="4" Font="Micro" Text="City"></Label>
+                    <Label HorizontalOptions="Center" Grid.Column="5" Font="Micro" Text="Branch"></Label>
+                    <Label HorizontalOptions="Center" Grid.Column="6" Font="Micro" Text="Assigned"></Label>
 
                 </Grid>
             </ListView.Header>

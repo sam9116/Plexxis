@@ -7,13 +7,16 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Xamarin.Forms;
+using Microsoft.WindowsAzure.MobileServices;
+using app.Services;
+using System.Net.Http;
+using System.Collections.Generic;
 
 namespace app.ViewModel
 {
     public class MainPageViewModel : ViewModelBase
     {
-        public string url = "http://10.0.2.2:8000/api/employee";
+        public string url = Constants.apiuri+"api/employee";
         public EmployeeManager employeeManager;
 
         public EmployeesList plexxisEmployees;
@@ -48,7 +51,7 @@ namespace app.ViewModel
             IsBusy = true;
             try
             {
-                var request = WebRequest.Create(url);
+                /*var request = WebRequest.Create(url);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "GET";
 
@@ -63,7 +66,12 @@ namespace app.ViewModel
                     var newemployeedata = plexxisEmployees.employees.Select(x => JObject.FromObject(x)).ToList();
                     await employeeManager.AddMultipleEmployees(plexxisEmployees.employees);
                     employees = plexxisEmployees.employees;
-                }
+                }*/
+                var result = await HttpUtils.service.InvokeApiAsync("employee", HttpMethod.Get, new Dictionary<string, string>());
+                plexxisEmployees = JsonConvert.DeserializeObject<EmployeesList>(result.ToString());
+                var newemployeedata = plexxisEmployees.employees.Select(x => JObject.FromObject(x)).ToList();
+                await employeeManager.AddMultipleEmployees(plexxisEmployees.employees);
+                employees = plexxisEmployees.employees;
             }
             catch (Exception ex)
             {
