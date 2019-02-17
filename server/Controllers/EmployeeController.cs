@@ -70,7 +70,7 @@ namespace server.Controllers
             await Store.UpsertAsync("Employee", new List<JObject>() { JObject.FromObject(targetEmployee) }, true);
             return new JsonResult("200");
         }
-        [Route("Delete")]
+        [Route("DeleteEmployee")]
         [HttpGet]
         public async Task<JsonResult> DeleteEmployee(int employeeId)
         {

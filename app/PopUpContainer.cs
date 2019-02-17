@@ -21,13 +21,13 @@ namespace app.ViewModel
         protected override async void OnDisappearing()
         {
             base.OnDisappearing();
-
             EmployeeDetailView dyingview = (EmployeeDetailView)Content;
             bool success = await EmployeeManager.DefaultManager.SaveEmployeeAsync(dyingview.employeeDetailPageViewModel.employee);
-            if (!success)
-            {
-                await DisplayAlert("Fail", "Employee Data Did Not Save Successfully", "Ok");
-            }
+            NavigationPage np = (NavigationPage)App.Current.MainPage;
+            MainPage mp = (MainPage)np.CurrentPage;
+
+            await mp.mainPageViewModel.fetchEmployeeData_Offline();
+
 
         }
     }

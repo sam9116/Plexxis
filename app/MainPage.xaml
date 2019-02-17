@@ -36,7 +36,7 @@
                                 <Label  HorizontalOptions="Center" Grid.Column="3" Text="{Binding Profession}" TextColor="#000000"  FontSize="Micro"/>
                                 <Label  HorizontalOptions="Center" Grid.Column="4" Text="{Binding City}" TextColor="#000000"        FontSize="Micro"/>
                                 <Label  HorizontalOptions="Center" Grid.Column="5" Text="{Binding Branch}" TextColor="#000000"      FontSize="Micro"/>
-                                <Switch HorizontalOptions="Center" Grid.Column="6"  x:Name="AssignedSwitch" IsToggled="{Binding Assigned}" IsEnabled="{Binding Path=BindingContext.Online, Source={x:Reference Name=EmployeeList}}" />
+                                <Switch HorizontalOptions="Center" Grid.Column="6"  x:Name="AssignedSwitch" IsToggled="{Binding Assigned}" IsEnabled="{Binding Path=BindingContext.Online, Source={x:Reference Name=EmployeeList}}" Toggled="AssignedSwitch_Toggled" />
                                 
                             </Grid>
                             

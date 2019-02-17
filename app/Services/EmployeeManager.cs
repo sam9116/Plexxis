@@ -98,8 +98,25 @@ namespace app
 
             
         }
-        public async Task DeleteEmployeeAsync(String Id)
+        public async Task<bool> DeleteEmployeeAsync(String Id)
         {
+            Dictionary<string, string> payload = new Dictionary<string, string>
+            {
+                { "Id", Id }
+            };
+            try
+            {
+                var result = await HttpUtils.service.InvokeApiAsync("employee/DeleteEmployee", HttpMethod.Get, payload);
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+
+
+
             Dictionary<string, object> Ids = new Dictionary<string, object>
             {
                 { "@Id", Id }
@@ -110,11 +127,12 @@ namespace app
                 await Store.InitializeAsync();              
             }
             catch (Exception ex)
-            {             
-                
+            {
+
             }
             await Store.ExecuteQueryAsync("Employee", "Delete From Employee Where Id = @Id", Ids);
 
+            return true;
         }
 
 

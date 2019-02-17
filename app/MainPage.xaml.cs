@@ -21,6 +21,8 @@ namespace app
 {
     public partial class MainPage : ContentPage
     {
+
+      
         public MainPageViewModel mainPageViewModel;
         Random r = new Random();
         public ToolbarItem Add = new ToolbarItem()
@@ -33,9 +35,9 @@ namespace app
             InitializeComponent();
             BindingContext = mainPageViewModel = new MainPageViewModel();
             Add.Clicked += Add_Clicked;
-            EmployeeView.ItemTapped += EmployeeView_ItemTapped;
+            EmployeeView.ItemTapped += EmployeeView_ItemTapped;        
         }
-
+      
         private async void EmployeeView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if(PopupNavigation.Instance.PopupStack.Count<1)
@@ -45,6 +47,7 @@ namespace app
             
         }
 
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -52,13 +55,13 @@ namespace app
             {
                 ToolbarItems.Add(Add);
             }
-            mainPageViewModel.fetchEmployeeData_Offline();
+            await mainPageViewModel.fetchEmployeeData_Offline();
             mainPageViewModel.fetchEmployeeData();
         }
 
         private async void EmployeeView_Refreshing(object sender, EventArgs e)
         {
-            mainPageViewModel.fetchEmployeeData_Offline();
+            await mainPageViewModel.fetchEmployeeData_Offline();
             mainPageViewModel.fetchEmployeeData();
         }
 
@@ -69,9 +72,33 @@ namespace app
             await PopupNavigation.Instance.PushAsync(new PopUpContainer(new Employee() { Id = IdFromServer, Name ="",Assigned = false,Branch="",City="",Code="",Color= "", Profession="" }));
         }
 
-        private void Delete_Clicked(object sender, EventArgs e)
+        private async void Delete_Clicked(object sender, EventArgs e)
         {
+            MenuItem mi = (MenuItem)sender;
+            Employee delete_employee = (Employee)mi.CommandParameter;
+            bool success = await mainPageViewModel.employeeManager.DeleteEmployeeAsync(delete_employee.Id.ToString());
+            if(success)
+            {
+                mainPageViewModel.employees.Remove(delete_employee);
+            }
+            else
+            {
+                await DisplayAlert("Failed to Delete Selected Employee", "Check Your Internet", "Ok");
+            }
+        }
 
+        private async void AssignedSwitch_Toggled(object sender, ToggledEventArgs e)
+        {
+            Employee currentEmployee = (Employee)((ViewCell)((StackLayout)((Grid)((View)sender).Parent).Parent).Parent).BindingContext;
+            if(currentEmployee !=null)
+            {
+                if (currentEmployee.Assigned != e.Value)
+                {
+                    currentEmployee.Assigned = e.Value;
+                    await mainPageViewModel.employeeManager.SaveEmployeeAsync(currentEmployee);
+                }
+            }
+            
         }
     }
 }
