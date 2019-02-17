@@ -78,7 +78,7 @@ namespace server.Controllers
             MobileServiceSQLiteStore Store = new MobileServiceSQLiteStore("local.db");
             Store.DefineTable<Employee>();
             await Store.InitializeAsync();
-            await Store.DeleteAsync("Employee", new List<string>() { employeeId.ToString() });
+            await Store.ExecuteQueryAsync("Employee", "Delete From Employee where Id = @Id", new Dictionary<string, object>() { { "@Id", employeeId } });
 
             return new JsonResult("200");
         }
