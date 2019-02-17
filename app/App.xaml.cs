@@ -11,23 +11,7 @@ namespace app
 {
     public partial class App : Application
     {
-        public bool DoIHaveInternet()
-        {
-            if (!CrossConnectivity.IsSupported)
-                return true;
-
-            //Do this only if you need to and aren't listening to any other events as they will not fire.
-            var connectivity = CrossConnectivity.Current;
-
-            try
-            {
-                return connectivity.IsConnected;
-            }
-            finally
-            {
-                CrossConnectivity.Dispose();
-            }
-        }
+       
         
 
     public App()
@@ -41,10 +25,7 @@ namespace app
         protected override async void OnStart()
         {
             // Handle when your app starts
-            CrossConnectivity.Current.ConnectivityChanged += async (sender, args) =>
-            {
-                Debug.WriteLine($"Connectivity changed to {args.IsConnected}");
-            };
+          
         }
 
         protected override void OnSleep()

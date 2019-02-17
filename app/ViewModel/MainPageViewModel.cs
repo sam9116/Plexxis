@@ -11,6 +11,8 @@ using Microsoft.WindowsAzure.MobileServices;
 using app.Services;
 using System.Net.Http;
 using System.Collections.Generic;
+using Plugin.Connectivity;
+using Xamarin.Forms;
 
 namespace app.ViewModel
 {
@@ -20,7 +22,19 @@ namespace app.ViewModel
         public EmployeeManager employeeManager;
 
         public EmployeesList plexxisEmployees;
-
+        private bool online { get; set; }
+        public bool Online
+        {
+            get
+            {
+                return online;
+            }
+            set
+            {
+                online = value;
+                OnPropertyChanged(nameof(Online));
+            }
+        }
         public ObservableCollection<Employee> employees
         {
             get
@@ -33,11 +47,54 @@ namespace app.ViewModel
                 OnPropertyChanged(nameof(employees));
             }
         }
+        public bool AmIonline()
+        {
+            if (!CrossConnectivity.IsSupported)
+                return true;
+
+            //Do this only if you need to and aren't listening to any other events as they will not fire.
+            var connectivity = CrossConnectivity.Current;
+
+            try
+            {
+                return connectivity.IsConnected;
+            }
+            finally
+            {
+                CrossConnectivity.Dispose();
+            }
+            
+        }
 
         public MainPageViewModel()
         {
             employeeManager = EmployeeManager.DefaultManager;
             plexxisEmployees = new EmployeesList();
+            online = AmIonline();
+            CrossConnectivity.Current.ConnectivityChanged += Current_ConnectivityChanged;
+        }
+        private void Current_ConnectivityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
+        {
+            if (e.IsConnected)
+            {
+                Online = true;
+                if(((NavigationPage)App.Current.MainPage).CurrentPage.GetType()== typeof(MainPage))
+                {
+                    MainPage mp = (MainPage)((NavigationPage)App.Current.MainPage).CurrentPage;
+                    mp.ToolbarItems.Clear();
+                    mp.ToolbarItems.Add(mp.Add);
+                }
+            }
+            else
+            {
+                Online = false;
+                if (((NavigationPage)App.Current.MainPage).CurrentPage.GetType() == typeof(MainPage))
+                {
+                    MainPage mp = (MainPage)((NavigationPage)App.Current.MainPage).CurrentPage;
+                    mp.ToolbarItems.Clear();
+                }
+            }
+            
         }
         public async Task fetchEmployeeData_Offline()
         {

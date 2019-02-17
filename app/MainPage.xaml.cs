@@ -12,6 +12,8 @@ using Newtonsoft.Json.Linq;
 using app.Models;
 using app.ViewModel;
 using Rg.Plugins.Popup.Services;
+using Plugin.Connectivity;
+using System.Diagnostics;
 
 namespace app
 {
@@ -19,16 +21,27 @@ namespace app
     {
         public MainPageViewModel mainPageViewModel;
         Random r = new Random();
+        public ToolbarItem Add = new ToolbarItem()
+        {
+            Text = "Add ➕"
+        };
+       
         public MainPage()
         {
             InitializeComponent();
             BindingContext = mainPageViewModel = new MainPageViewModel();
-
-            
+            Add.Clicked += Add_Clicked;
         }
+
+       
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            if(mainPageViewModel.Online)
+            {
+                ToolbarItems.Add(Add);
+            }
             mainPageViewModel.fetchEmployeeData_Offline();
             mainPageViewModel.fetchEmployeeData();
         }
