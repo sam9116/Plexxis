@@ -1,4 +1,6 @@
 ﻿using app.Models;
+using app.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -6,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -66,18 +69,34 @@ namespace app
             return Locallist;
 
         }
-        public async Task SaveEmployeeAsync(Employee employee)
+        public async Task<bool> SaveEmployeeAsync(Employee employee)
         {
+            Dictionary<string, string> payload = new Dictionary<string, string>
+            {
+                { "targetEmployeeinput", JObject.FromObject(employee).ToString() }
+            };
             try
             {
-                await Store.InitializeAsync();                
+                var result = await HttpUtils.service.InvokeApiAsync("employee/UpsertEmployee", HttpMethod.Get, payload);
+                
             }
             catch (Exception ex)
             {
-                               
+                return false;
+            }
+
+            try
+            {
+                await Store.InitializeAsync();
+            }
+            catch (Exception ex)
+            {
+
             }
             await Store.UpsertAsync("Employee", new List<JObject>() { JObject.FromObject(employee) }, true);
+            return true;
 
+            
         }
         public async Task DeleteEmployeeAsync(String Id)
         {

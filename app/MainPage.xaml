@@ -14,6 +14,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            
+                            <MenuItem x:Name="Delete"  Clicked="Delete_Clicked" CommandParameter="{Binding .}"
+               Text="Delete" IsDestructive="True" />
+                        </ViewCell.ContextActions>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5"  BackgroundColor="{Binding Color}" Opacity="1">
                             <Grid HorizontalOptions="FillAndExpand" Opacity="1">
                                 <Grid.ColumnDefinitions>

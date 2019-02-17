@@ -7,7 +7,7 @@ namespace app.ViewModel
 {
     public class EmployeeDetailPageViewModel:ViewModelBase
     {
-        Employee employee { get; set; }
+        public Employee employee { get; set; }
 
         public EmployeeDetailPageViewModel(Employee input)
         {

@@ -125,7 +125,7 @@ namespace app.ViewModel
                     employees = plexxisEmployees.employees;
                 }*/
                 var result = await HttpUtils.service.InvokeApiAsync("employee", HttpMethod.Get, new Dictionary<string, string>());
-                plexxisEmployees = JsonConvert.DeserializeObject<EmployeesList>(result.ToString());
+                plexxisEmployees.employees = JsonConvert.DeserializeObject<ObservableCollection<Employee>>(result.ToString());
                 var newemployeedata = plexxisEmployees.employees.Select(x => JObject.FromObject(x)).ToList();
                 await employeeManager.AddMultipleEmployees(plexxisEmployees.employees);
                 employees = plexxisEmployees.employees;

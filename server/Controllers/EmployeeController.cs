@@ -16,6 +16,7 @@ namespace server.Controllers
     [ApiController]
     public class EmployeeController : Controller
     {
+        [HttpGet]
         public async Task<JsonResult> Get()
         {
             //if we need to store data server side we will need a database, i'm lazy so i will use the same sqlite db i used in the app here as well
@@ -46,25 +47,40 @@ namespace server.Controllers
         }
 
         [Route("GetNextId")]
+        [HttpGet]
         public async Task<JsonResult> GetNextId()
         {
             MobileServiceSQLiteStore Store = new MobileServiceSQLiteStore("local.db");
             Store.DefineTable<Employee>();
             await Store.InitializeAsync();
-            var result = await Store.ExecuteQueryAsync("Employee", "SELECT MAX(Id) FROM Employee", new Dictionary<string, object>());            
-            return new JsonResult(result);
+            var result = await Store.ExecuteQueryAsync("Employee", "SELECT MAX(Id) FROM Employee", new Dictionary<string, object>());
+            int Id = int.Parse(result[0]["MAX(Id)"].ToString());
+            Id++;
+            return new JsonResult(Id);
         }
-
-        [HttpPost]
-        public async Task<OkResult> UpsertEmployee(Employee targetEmployee)
+        [Route("UpsertEmployee")]
+        [HttpGet]
+        public async Task<JsonResult> UpsertEmployee(string targetEmployeeinput)
+        {
+            //setup the database
+            var targetEmployee = JsonConvert.DeserializeObject<Employee>(targetEmployeeinput);
+            MobileServiceSQLiteStore Store = new MobileServiceSQLiteStore("local.db");
+            Store.DefineTable<Employee>();
+            await Store.InitializeAsync();
+            await Store.UpsertAsync("Employee", new List<JObject>() { JObject.FromObject(targetEmployee) }, true);
+            return new JsonResult("200");
+        }
+        [Route("Delete")]
+        [HttpGet]
+        public async Task<JsonResult> DeleteEmployee(int employeeId)
         {
             //setup the database
             MobileServiceSQLiteStore Store = new MobileServiceSQLiteStore("local.db");
             Store.DefineTable<Employee>();
             await Store.InitializeAsync();
-            await Store.UpsertAsync("Employee", new List<JObject>() { JObject.FromObject(targetEmployee) }, true);
+            await Store.DeleteAsync("Employee", new List<string>() { employeeId.ToString() });
 
-            return new OkResult();
+            return new JsonResult("200");
         }
     }
 }

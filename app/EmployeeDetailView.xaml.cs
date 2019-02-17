@@ -14,7 +14,7 @@ namespace app
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EmployeeDetailView : ContentView
 	{
-        EmployeeDetailPageViewModel employeeDetailPageViewModel;
+        public EmployeeDetailPageViewModel employeeDetailPageViewModel;
         public EmployeeDetailView (Employee Input)
 		{
 			InitializeComponent ();
