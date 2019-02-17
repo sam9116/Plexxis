@@ -9,8 +9,10 @@ namespace app.ViewModel
     {
         public Employee employee { get; set; }
 
-        public EmployeeDetailPageViewModel(Employee input)
+        public bool disableedit { get; set; }
+        public EmployeeDetailPageViewModel(Employee input,bool disableeditinput)
         {
+            disableedit = disableeditinput;
             employee = input;
         }
 

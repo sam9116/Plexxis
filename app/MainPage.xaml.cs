@@ -42,7 +42,7 @@ namespace app
         {
             if(PopupNavigation.Instance.PopupStack.Count<1)
             {
-                await PopupNavigation.Instance.PushAsync(new PopUpContainer((Employee)e.Item));
+                await PopupNavigation.Instance.PushAsync(new PopUpContainer((Employee)e.Item, mainPageViewModel.Online));
             }
             
         }
@@ -69,7 +69,7 @@ namespace app
         {
             var result = await HttpUtils.service.InvokeApiAsync("employee/GetNextId", HttpMethod.Get, new Dictionary<string, string>());
             int IdFromServer = int.Parse(result.ToString());
-            await PopupNavigation.Instance.PushAsync(new PopUpContainer(new Employee() { Id = IdFromServer, Name ="",Assigned = false,Branch="",City="",Code="",Color= "", Profession="" }));
+            await PopupNavigation.Instance.PushAsync(new PopUpContainer(new Employee() { Id = IdFromServer, Name ="",Assigned = false,Branch="",City="",Code="",Color= "", Profession="" },mainPageViewModel.Online));
         }
 
         private async void Delete_Clicked(object sender, EventArgs e)

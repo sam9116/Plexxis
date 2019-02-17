@@ -11,22 +11,27 @@ namespace app.ViewModel
 {
 	public class PopUpContainer : PopupPage
     {
+
         Employee oldcopy { get; set; }
-        
-		public PopUpContainer(Employee input)
+        bool disableedit { get; set; }
+		public PopUpContainer(Employee input,bool disableeditinput)
 		{
-           
-            Content = new EmployeeDetailView(input);
+             disableedit = disableeditinput;
+             Content = new EmployeeDetailView(input, disableeditinput);
 		}
         protected override async void OnDisappearing()
         {
             base.OnDisappearing();
-            EmployeeDetailView dyingview = (EmployeeDetailView)Content;
-            bool success = await EmployeeManager.DefaultManager.SaveEmployeeAsync(dyingview.employeeDetailPageViewModel.employee);
-            NavigationPage np = (NavigationPage)App.Current.MainPage;
-            MainPage mp = (MainPage)np.CurrentPage;
+            if(!disableedit)
+            {
+                EmployeeDetailView dyingview = (EmployeeDetailView)Content;
+                bool success = await EmployeeManager.DefaultManager.SaveEmployeeAsync(dyingview.employeeDetailPageViewModel.employee);
+                NavigationPage np = (NavigationPage)App.Current.MainPage;
+                MainPage mp = (MainPage)np.CurrentPage;
 
-            await mp.mainPageViewModel.fetchEmployeeData_Offline();
+                await mp.mainPageViewModel.fetchEmployeeData_Offline();
+            }
+            
 
 
         }

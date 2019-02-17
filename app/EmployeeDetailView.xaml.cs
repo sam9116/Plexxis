@@ -15,10 +15,10 @@ namespace app
 	public partial class EmployeeDetailView : ContentView
 	{
         public EmployeeDetailPageViewModel employeeDetailPageViewModel;
-        public EmployeeDetailView (Employee Input)
+        public EmployeeDetailView (Employee Input, bool disableedit)
 		{
 			InitializeComponent ();
-            BindingContext = employeeDetailPageViewModel = new EmployeeDetailPageViewModel(Input);
+            BindingContext = employeeDetailPageViewModel = new EmployeeDetailPageViewModel(Input,disableedit);
         }
 	}
 }

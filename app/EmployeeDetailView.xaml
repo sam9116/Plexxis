@@ -7,27 +7,27 @@
             <StackLayout Orientation="Vertical" VerticalOptions="Center" BackgroundColor="White" Opacity="0.9">
                 <StackLayout Orientation="Horizontal" Opacity="1">
                     <Label VerticalOptions="Center" Text="Name: "></Label>
-                    <Editor Placeholder="Name" Text="{Binding employee.Name,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand"/>
+                    <Editor Placeholder="Name" Text="{Binding employee.Name,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand" IsEnabled="{Binding disableedit}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Opacity="1">
                     <Label VerticalOptions="Center"  Text="Code: "></Label>
-                    <Editor Placeholder="Code" Text="{Binding employee.Code,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand"/>
+                    <Editor Placeholder="Code" Text="{Binding employee.Code,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand" IsEnabled="{Binding disableedit}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Opacity="1">
                     <Label VerticalOptions="Center"   Text="Profession: "></Label>
-                    <Editor Placeholder="Profession" Text="{Binding employee.Profession,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand"/>
+                    <Editor Placeholder="Profession" Text="{Binding employee.Profession,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand" IsEnabled="{Binding disableedit}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Opacity="1">
                     <Label VerticalOptions="Center"   Text="City: "></Label>
-                    <Editor Placeholder="City" Text="{Binding employee.City,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand"/>
+                    <Editor Placeholder="City" Text="{Binding employee.City,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand" IsEnabled="{Binding disableedit}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Opacity="1">
                     <Label VerticalOptions="Center"   Text="Branch: "></Label>
-                    <Editor Placeholder="Branch" Text="{Binding employee.Branch,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand"/>
+                    <Editor Placeholder="Branch" Text="{Binding employee.Branch,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand" IsEnabled="{Binding disableedit}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Opacity="1">
                     <Label VerticalOptions="Center"  Text="Color: "></Label>
-                    <Editor Placeholder="Color" Text="{Binding employee.Color,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand"/>
+                    <Editor Placeholder="Color" Text="{Binding employee.Color,Mode=TwoWay}" TextColor="#000000" HorizontalOptions="FillAndExpand" IsEnabled="{Binding disableedit}"/>
                 </StackLayout>
             </StackLayout>
 
